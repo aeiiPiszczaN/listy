@@ -6,15 +6,17 @@
 #define LISTY_LISTY_H
 
 #include <iostream>
+#include <vector>
 
-struct Lista {
-    int _var;
-    Lista *_wsk;
+struct Elem {
+    std::vector<int> wartosc;
+    Elem *nastepny;
 };
 
 void testPointer();
-void addFront(Lista *&start);
-void printList(Lista *&start);
-void deleteList(Lista *&start);
+void addFront(Elem *&start, std::vector<int> wartosci);
+void addBack(Elem *&start, std::vector<int> wartosci);
+void printList(Elem *&start);
+void deleteList(Elem *&start);
 
 #endif //LISTY_LISTY_H

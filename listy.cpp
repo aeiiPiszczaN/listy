@@ -4,36 +4,63 @@
 
 #include "listy.h"
 
-void addFront(Lista *&start){
-    Lista *p;
+void addFront(Elem *&start, std::vector<int> wartosci){
+    Elem *nowy = new Elem;
+    nowy->wartosc = wartosci;
+    nowy->nastepny = start;
+    start = nowy;
 
-    for(int i=0; i<10; i++){
+    /*for(int i=0; i<10; i++){
         p = new Lista;
-        p->_var = i;
-        p->_wsk = start;
+        p->wartosc = i;
+        p->nastepny = start;
         start = p;
-    }
+    }*/
 };
 
-void printList(Lista *&start){
-    Lista *p;
+void addBack(Elem *&start, std::vector<int> wartosci){
+    Elem *nowy = new Elem;
+
+    if(start){
+
+        Elem *p = start;
+
+        while(p->nastepny) {
+            p = p->nastepny;
+        }
+
+        p->nastepny = nowy;
+        nowy->nastepny = nullptr;
+        nowy->wartosc = wartosci;
+
+    } else {
+
+        nowy->wartosc = wartosci;
+        nowy->nastepny = start;
+        start = nowy;
+
+    }
+}
+
+void printList(Elem *&start){
+    Elem *p;
     p=start;
     while(p) {
-        std::cout<< p->_var << " ";
-        p = p->_wsk;
+        std::cout<< p->wartosc[0] << " ";
+        p = p->nastepny;
     }
     std::cout << "\n";
 };
 
-void deleteList(Lista *&start){
-    Lista *p;
-    std::cout << "\n\n-------DELETING-------\n\n";
+void deleteList(Elem *&start){
+    Elem *p;
+    std::cout << "\n\n-------DELETING LIST-------\n\n";
 
     while (start) {
         p = start;
-            std::cout << " Before: " << start->_var << " ";
-        start = start->_wsk;
-            std::cout << " After: " << start->_var << "\n";
+            std::cout << " Before: " << start->wartosc[0] << " ";
+        start = start->nastepny;
+            std::cout << " After: " << start->wartosc[0] << "\n";
         delete p;
     }
 };
